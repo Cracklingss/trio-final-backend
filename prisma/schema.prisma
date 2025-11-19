@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admins {
+  id String @id @default(uuid())
+  name String 
+  email String @unique
+  password String
+}
+
+model Laborers {
+  id String @id @default(uuid())
+  email String @unique
+  password String
+  displayName String
+  firstName String
+  lastName String
+  gender String
+  contactNumber String
+  profilePicture String
+  rate Int @default(0)
+  isActive Boolean @default(true)
+}
+
+model Customers {
+  id String @id @default(uuid())
+  email String @unique
+  password String
+  displayName String
+  firstName String
+  lastName String
+  gender String
+  contactNumber String
+  profilePicture String
+  isActive Boolean @default(true)
+}
+
+model Services {
+  id String @id @default(uuid())
+  name String
+  service String
+  description String
+  availability String
+  serviceLoc String
+  isActive Boolean @default(true)
+}
+
+model ReportedUsers {
+  id String @id @default(uuid())
+  reportedAcc String
+  typeOfUser String
+  reason String
+  others String @default("")
+  whatHappened String 
+  status String @default("In Progress")
+}
+
+model Bookings {
+  id String @id @default(uuid())
+  bookingDate DateTime @default(now())
+  bookingTime DateTime
+  address String
+  bookerName String
+  bookerContact String
+  bookerEmail String @default("")
+  status String @default("In Progress")
+  isActive Boolean @default(true)
+  details String
+}
