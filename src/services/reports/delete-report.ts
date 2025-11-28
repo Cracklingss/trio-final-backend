@@ -6,7 +6,6 @@ export async function deleteReportService(id: string) {
     return {
       status: "error",
       message: "ID is not provided",
-      data: null
     }
   }
 
@@ -16,7 +15,6 @@ export async function deleteReportService(id: string) {
     return {
       status: "error",
       message: "Report doesn't exist",
-      data: null
     }
   }
 

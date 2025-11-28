@@ -17,7 +17,6 @@ export async function getServiceByIdService(id: string) {
     return {
       status: "error",
       message: "No id provided",
-      data: null
     }
   }
 
@@ -29,7 +28,6 @@ export async function getServiceByIdService(id: string) {
     return {
       status: "error",
       message: "Service not found",
-      data: null
     }
   }
 

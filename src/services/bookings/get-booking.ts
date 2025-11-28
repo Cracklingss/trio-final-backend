@@ -16,7 +16,6 @@ export async function getBookingByIdService(id: string) {
     return {
       status: "error",
       message: "ID is not provided",
-      data: null
     }
   }
 
@@ -26,7 +25,6 @@ export async function getBookingByIdService(id: string) {
     return {
       status: "error",
       message: "Booking doesn't exists",
-      data: null
     }
   }
 
@@ -35,7 +33,6 @@ export async function getBookingByIdService(id: string) {
     return {
       status: "error",
       message: "Booking is no longer active",
-      data: null,
     }
   }
 

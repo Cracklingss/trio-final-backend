@@ -6,7 +6,6 @@ export async function hardDeleteServiceService(id: string) {
     return {
       status: "error",
       message: "ID is not provided",
-      data: null
     }
   }
 
@@ -16,7 +15,6 @@ export async function hardDeleteServiceService(id: string) {
     return {
       status: "error",
       message: "Service doesn't exists",
-      data: null
     }
   }
 
@@ -36,7 +34,6 @@ export async function softDeleteServiceService(id: string) {
     return {
       status: "error",
       message: "ID is not provided",
-      data: null
     }
   }
 
@@ -46,7 +43,6 @@ export async function softDeleteServiceService(id: string) {
     return {
       status: "error",
       message: "Service is already deactivated",
-      data: null
     }
   }
 

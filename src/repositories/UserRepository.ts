@@ -45,13 +45,13 @@ class UserRepository {
 
   async createLaborer(data: UserInterfaces.LaborerData) {
     return await prisma.laborers.create({
-      data: data as Prisma.LaborersCreateInput,
+      data,
     });
   }
 
   async createCustomer(data: UserInterfaces.CustomerData) {
     return await prisma.customers.create({
-      data: data as Prisma.CustomersCreateInput,
+      data,
     });
   }
 
@@ -61,11 +61,11 @@ class UserRepository {
   ) {
     if (userType === "laborer") {
       return await prisma.laborers.create({
-        data: data as Prisma.LaborersCreateInput,
+        data,
       });
     } else if (userType === "customer") {
       return await prisma.customers.create({
-        data: data as Prisma.CustomersCreateInput,
+        data,
       });
     } else {
       return null;

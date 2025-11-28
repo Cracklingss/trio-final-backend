@@ -7,7 +7,6 @@ export async function updateServiceService(id: string, data: ServiceData) {
     return {
       status: "error",
       message: "Id is not provided",
-      data: null
     }
   }
 
@@ -17,7 +16,6 @@ export async function updateServiceService(id: string, data: ServiceData) {
     return {
       status: "error",
       message: "Service not found",
-      data: null
     }
   }
 
@@ -37,7 +35,6 @@ export async function reactivateServiceService(id: string) {
     return {
       status: "error",
       message: "ID is not provided",
-      data: null
     }
   }
 
@@ -47,7 +44,6 @@ export async function reactivateServiceService(id: string) {
     return {
       status: "error",
       message: "Product is already activated",
-      data: null
     }
   }
 

@@ -33,7 +33,6 @@ export async function updateCustomerService (email: string, data: Partial<Interf
   return {
     status: "success",
     message: "User Updated",
-    data: null
   }
 }
 
@@ -69,7 +68,6 @@ export async function updateLaborerService (email: string, data: Partial<Interfa
   return {
     status: "success",
     message: "User Updated",
-    data: null
   }
 }
 

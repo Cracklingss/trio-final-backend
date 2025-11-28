@@ -17,7 +17,6 @@ export async function getReportByIdService(id: string) {
     return {
       status: "error",
       message: "ID is not provided",
-      data: null,
     };
   }
 
@@ -29,7 +28,6 @@ export async function getReportByIdService(id: string) {
     return {
       status: "error",
       message: "Report does not exist",
-      data: null
     };
   }
 

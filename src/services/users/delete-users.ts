@@ -13,7 +13,6 @@ export async function  hardDeleteUserService(email: string, userType: string) {
   return {
     status: "success",
     message: "User deleted from the database!",
-    data: null
   }
 }
 
@@ -35,6 +34,5 @@ export async function softDeleteUserService(email: string, userType: string) {
   return {
     status: "success",
     message: "User deactivated",
-    data: null
   }
 }

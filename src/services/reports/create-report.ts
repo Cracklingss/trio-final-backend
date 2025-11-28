@@ -7,7 +7,6 @@ export async function createReportService(data: ReportsData) {
     return {
       status: "error",
       message: "Missing fields!",
-      data: null,
     };
   }
 

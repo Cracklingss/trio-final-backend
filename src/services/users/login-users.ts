@@ -32,6 +32,5 @@ export async function loginUserService(email: string, password: string , userTyp
   return {
     status: "success",
     message: "Successfully logged in!",
-    data: null
   }
 }
