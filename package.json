@@ -27,6 +27,7 @@
     "passport-google-oauth20": "^2.0.0",
     "pg": "^8.16.3",
     "prisma": "6.2.1",
+    "resend": "^6.5.2",
     "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {

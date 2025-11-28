@@ -14,21 +14,7 @@ model Admins {
   password String
 }
 
-model Laborers {
-  id String @id @default(uuid())
-  email String @unique
-  password String
-  displayName String?
-  firstName String?
-  lastName String?
-  gender String?
-  contactNumber String?
-  profilePicture String?
-  rate Int @default(0)
-  isActive Boolean @default(true)
-}
-
-model Customers {
+model Users {
   id String @id @default(uuid())
   email String @unique
   password String
@@ -38,8 +24,37 @@ model Customers {
   gender String?
   contactNumber String?
   profilePicture String?
+  rate Int @default(0)
   isActive Boolean @default(true)
+  userType String?
 }
+
+// model Laborers {
+//   id String @id @default(uuid())
+//   email String @unique
+//   password String
+//   displayName String?
+//   firstName String?
+//   lastName String?
+//   gender String?
+//   contactNumber String?
+//   profilePicture String?
+//   rate Int @default(0)
+//   isActive Boolean @default(true)
+// }
+
+// model Customers {
+//   id String @id @default(uuid())
+//   email String @unique
+//   password String
+//   displayName String @default("")
+//   firstName String?
+//   lastName String?
+//   gender String?
+//   contactNumber String?
+//   profilePicture String?
+//   isActive Boolean @default(true)
+// }
 
 model Services {
   id String @id @default(uuid())

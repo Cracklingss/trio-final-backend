@@ -5,102 +5,31 @@ const prisma = new PrismaClient();
 
 class UserRepository {
   async findAll() {
-    const [laborers, customers] = await Promise.all([
-      prisma.laborers.findMany({ orderBy: { displayName: "asc" } }),
-      prisma.customers.findMany({ orderBy: { displayName: "asc" } }),
-    ]);
-
-    const users = [ ...laborers, ...customers ];
-
-    return users;
+    return await prisma.users.findMany();
   }
 
   async findByEmail (email: string) {
-    const result = await this.findAll();
-
-    const user = result.find((i) => i.email === email);
-
-    return user;
+    return await prisma.users.findFirst({ where: { email } });
   }
 
-  async createLaborer(data: UserInterfaces.CreateUserData) {
-    const result = await this.findByEmail(data.email);
-
-    if(result){
-      if(data.email === result.email){
-        return null
-      }
-    }
-
-    return await prisma.laborers.create({
-      data,
-    });
+  async create(data: UserInterfaces.CreateUserData) {
+    return await prisma.users.create({ data });
   }
 
-  async createCustomer(data: UserInterfaces.CreateUserData) {
-    const result = await this.findByEmail(data.email);
-
-    if(result){
-      if(data.email === result.email){
-        return null
-      }
-    }
-
-    return await prisma.customers.create({
-      data,
-    });
+  async update(email: string, data: Partial<UserInterfaces.CreateUserData>) {
+    return await prisma.users.update({ where: { email }, data });
   }
 
-  
-
-  async updateLaborer(email: string, data: Partial<UserInterfaces.LaborerData>) {
-    return await prisma.laborers.update({ where: { email }, data });
+  async hardDelete(email: string) {
+    return await prisma.users.delete({ where: { email } });
   }
 
-  async updateCustomer(email: string, data: Partial<UserInterfaces.CustomerData>) {
-    return await prisma.customers.update({ where: { email }, data });
+  async softDelete(email: string) {
+    return await prisma.users.update({ where: { email }, data: { isActive: false } })
   }
 
-  async hardDelete(email: string, userType: string) {
-    if (userType === "customer") {
-      return await prisma.customers.delete({ where: { email } });
-    } else if (userType === "laborer") {
-      return await prisma.laborers.delete({ where: { email } });
-    } else {
-      return null;
-    }
-  }
-
-  async softDelete(email: string, userType: string) {
-    if (userType === "customer") {
-      return await prisma.customers.update({
-        where: { email },
-        data: { isActive: false },
-      });
-    } else if (userType === "laborer") {
-      return await prisma.laborers.update({
-        where: { email },
-        data: { isActive: false },
-      });
-    } else {
-      return null;
-    }
-  }
-
-  async reactivate(email: string, userType: string) {
-    if (userType === "customer") {
-      return await prisma.customers.update({
-        where: { email },
-        data: { isActive: true },
-      });
-    } else if (userType === "laborer") {
-      return await prisma.laborers.update({
-        where: { email },
-        data: { isActive: true },
-      });
-    } else {
-      return null;
-    }
+  async reactivate(email: string) {
+    return await prisma.users.update({ where: { email }, data: { isActive: true }});
   }
 }
 
