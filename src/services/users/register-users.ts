@@ -1,21 +1,15 @@
 import UserRepository from "@/repositories/UserRepository";
 import bcrypt from "bcryptjs";
-import { CustomerData, LaborerData } from "@/types/user";
+import { CreateUserData } from "@/types/user";
 
 export async function registerLaborerService(
-  data: LaborerData,
+  data: CreateUserData,
   userType: string
 ) {
   // Validate the fields
   if (
     !data.email ||
-    !data.password ||
-    !data.displayName ||
-    !data.firstName ||
-    !data.lastName ||
-    !data.gender ||
-    !data.contactNumber ||
-    !data.profilePicture
+    !data.password
   ) {
     return {
       status: "error",
@@ -24,7 +18,7 @@ export async function registerLaborerService(
   }
 
   //Check for email duplication
-  const user = await UserRepository.findByEmail(data.email, userType);
+  const user = await UserRepository.findByEmail(data.email);
   if (user?.email === data.email) {
     return {
       status: "error",
@@ -39,13 +33,6 @@ export async function registerLaborerService(
   const result = await UserRepository.createLaborer({
     email: data.email,
     password: hashedPassword,
-    displayName: data.displayName,
-    firstName: data.firstName,
-    lastName: data.lastName,
-    gender: data.gender,
-    contactNumber: data.contactNumber,
-    profilePicture: data.profilePicture,
-    isActive: data.isActive,
   });
 
   return {
@@ -56,19 +43,13 @@ export async function registerLaborerService(
 }
 
 export async function registerCustomerService(
-  data: CustomerData,
+  data: CreateUserData,
   userType: string
 ) {
   // Validate fields
   if (
     !data.email ||
-    !data.password ||
-    !data.displayName ||
-    !data.firstName ||
-    !data.lastName ||
-    !data.gender ||
-    !data.contactNumber ||
-    !data.profilePicture
+    !data.password
   ) {
     return {
       status: "error",
@@ -77,7 +58,7 @@ export async function registerCustomerService(
   }
 
   //Check for email duplication
-  const user = await UserRepository.findByEmail(data.email, userType);
+  const user = await UserRepository.findByEmail(data.email);
   if (user?.email === data.email) {
     return {
       status: "error",
@@ -92,13 +73,6 @@ export async function registerCustomerService(
   const result = await UserRepository.createCustomer({
     email: data.email,
     password: hashedPassword,
-    displayName: data.displayName,
-    firstName: data.firstName,
-    lastName: data.lastName,
-    gender: data.gender,
-    contactNumber: data.contactNumber,
-    profilePicture: data.profilePicture,
-    isActive: data.isActive,
   });
 
   return {

@@ -1,14 +1,14 @@
 import UserRepository from "@/repositories/UserRepository";
 import bcrypt from "bcryptjs"
 
-export async function loginUserService(email: string, password: string , userType: string) {
-  const user = await UserRepository.findByEmail(email, userType);
+export async function loginUserService(email: string, password: string) {
+  const user = await UserRepository.findByEmail(email);
 
   //Check if email is registered
   if(!user) {
     return {
       status: "error",
-      message: "Email is not registered! Redirecting to register page!"
+      message: "Email is not registered!"
     }
   }
 

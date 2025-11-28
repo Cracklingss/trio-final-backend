@@ -18,12 +18,12 @@ model Laborers {
   id String @id @default(uuid())
   email String @unique
   password String
-  displayName String
-  firstName String
-  lastName String
-  gender String
-  contactNumber String
-  profilePicture String
+  displayName String?
+  firstName String?
+  lastName String?
+  gender String?
+  contactNumber String?
+  profilePicture String?
   rate Int @default(0)
   isActive Boolean @default(true)
 }
@@ -32,12 +32,12 @@ model Customers {
   id String @id @default(uuid())
   email String @unique
   password String
-  displayName String
-  firstName String
-  lastName String
-  gender String
-  contactNumber String
-  profilePicture String
+  displayName String @default("")
+  firstName String?
+  lastName String?
+  gender String?
+  contactNumber String?
+  profilePicture String?
   isActive Boolean @default(true)
 }
 

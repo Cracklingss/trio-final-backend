@@ -15,62 +15,43 @@ class UserRepository {
     return users;
   }
 
-  async findByEmail (email: string, userType: string) {
-    if(userType === "customer") {
-      const user = await prisma.customers.findUnique({ where: { email } });
+  async findByEmail (email: string) {
+    const result = await this.findAll();
 
-      if(user) {
-        return {
-          ...user,
-          userType: "customer",
-        }
-      }
+    const user = result.find((i) => i.email === email);
 
-      return null
-    } else if(userType === "laborer") {
-      const user = await prisma.laborers.findUnique({ where: { email } });
-      
-      if(user) {
-        return {
-          ...user,
-          userType: "laborer",
-        }
-      }
-
-      return null;
-    } else {
-      return null;
-    }
+    return user;
   }
 
-  async createLaborer(data: UserInterfaces.LaborerData) {
+  async createLaborer(data: UserInterfaces.CreateUserData) {
+    const result = await this.findByEmail(data.email);
+
+    if(result){
+      if(data.email === result.email){
+        return null
+      }
+    }
+
     return await prisma.laborers.create({
       data,
     });
   }
 
-  async createCustomer(data: UserInterfaces.CustomerData) {
+  async createCustomer(data: UserInterfaces.CreateUserData) {
+    const result = await this.findByEmail(data.email);
+
+    if(result){
+      if(data.email === result.email){
+        return null
+      }
+    }
+
     return await prisma.customers.create({
       data,
     });
   }
 
-  async createUser(
-    userType: "laborer" | "customer",
-    data: UserInterfaces.LaborerData | UserInterfaces.CustomerData
-  ) {
-    if (userType === "laborer") {
-      return await prisma.laborers.create({
-        data,
-      });
-    } else if (userType === "customer") {
-      return await prisma.customers.create({
-        data,
-      });
-    } else {
-      return null;
-    }
-  }
+  
 
   async updateLaborer(email: string, data: Partial<UserInterfaces.LaborerData>) {
     return await prisma.laborers.update({ where: { email }, data });

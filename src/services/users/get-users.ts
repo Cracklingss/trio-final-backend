@@ -10,8 +10,8 @@ export async function getAllUsersService() {
   }
 }
 
-export async function getUserByEmailService(email: string, userType: string) {
-  const result = await UserRepository.findByEmail(email, userType);
+export async function getUserByEmailService(email: string) {
+  const result = await UserRepository.findByEmail(email);
 
   return {
     status: "success",
