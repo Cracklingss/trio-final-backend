@@ -12,6 +12,14 @@ export async function getAllUsersService() {
 
 export async function getUserByEmailService(email: string) {
   const result = await UserRepository.findByEmail(email);
+  console.log("fasdfads", result);
+
+  if(result === null) {
+    return {
+      status: "error",
+      message: "User not found"
+    }
+  }
 
   return {
     status: "success",

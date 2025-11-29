@@ -30,6 +30,7 @@ export async function registerUserService(data: CreateUserData) {
   await UserRepository.create({
     email: data.email,
     password: hashedPassword,
+    userType: data.userType
   });
 
   return {

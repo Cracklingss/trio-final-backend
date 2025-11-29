@@ -9,6 +9,7 @@ import {
   reactivateUserService,
   changePasswordService,
   loginUserService,
+  forgotPasswordService
 } from "@/services/users";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -27,7 +28,9 @@ class UserController {
   async getUserByEmail(req: Request, res: Response) {
     const { email } = req.body;
 
+    console.log(email);
     const result = await getUserByEmailService(email);
+    console.log(result.status);
 
     if (result.status === "error") {
       return res.status(400).json(result);
@@ -90,6 +93,33 @@ class UserController {
     if (result.status === "error") {
       return res.status(400).json(result);
     }
+
+    return res.status(200).json(result);
+  }
+
+  async forgotPassword(req: Request, res: Response) {
+    // Get user input
+    const { email, password } = req.body;
+
+    // Call the forgot password service
+    const result = await forgotPasswordService(email, password);
+
+    // Check error
+    if(result.status === "error") {
+      return res.status(400).json(result);
+    }
+
+    // Create a token
+    const payload = { email: email };
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+
+    // Send token to cookies
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "lax",
+      maxAge: 60 * 60 * 100
+    })
 
     return res.status(200).json(result);
   }

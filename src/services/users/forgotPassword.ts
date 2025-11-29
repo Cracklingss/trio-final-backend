@@ -1,12 +1,26 @@
 import UserRepositories from "@/repositories/UserRepository";
 import bcrypt from "bcryptjs";
 
-export async function forgotPasswordService(email: string, password: string) {
+export async function forgotPasswordService(email: string, newPassword: string) {
   // Get user
-  const result = await UserRepositories.findByEmail(email);
+  const user = await UserRepositories.findByEmail(email);
+
+  // Check if user exists
+  if(!user) {
+    return {
+      status: "error",
+      message: "User doesn't exists"
+    }
+  }
 
   // Hash password
-  // const hashedPassword = await UserRepositories.
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-  // Update user
+  // Update Password
+  await UserRepositories.update(email, { password: hashedPassword });
+
+  return {
+    status: "success",
+    message: "Succcessfully changed password"
+  }
 }
