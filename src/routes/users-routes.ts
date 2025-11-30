@@ -1,5 +1,6 @@
 import { Router } from "express";
-import UserController from "@/controllers/UserController"
+import UserController from "@/controllers/UserController";
+import UserUtilities from "@/utilities/user-utilities";
 
 const router = Router();
 
@@ -13,5 +14,7 @@ router.delete("/user-soft", UserController.softDeleteUser);
 router.patch("/user-reactivate", UserController.reactivateUser);
 router.patch("/change-password", UserController.changePassword);
 router.put("/forgot-password", UserController.forgotPassword);
+router.post("/token", UserUtilities.createToken);
+router.delete("/token", UserUtilities.deleteToken);
 
 export default router;

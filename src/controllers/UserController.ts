@@ -9,7 +9,7 @@ import {
   reactivateUserService,
   changePasswordService,
   loginUserService,
-  forgotPasswordService
+  forgotPasswordService,
 } from "@/services/users";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -105,21 +105,9 @@ class UserController {
     const result = await forgotPasswordService(email, password);
 
     // Check error
-    if(result.status === "error") {
+    if (result.status === "error") {
       return res.status(400).json(result);
     }
-
-    // Create a token
-    const payload = { email: email };
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
-
-    // Send token to cookies
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "lax",
-      maxAge: 60 * 60 * 100
-    })
 
     return res.status(200).json(result);
   }
