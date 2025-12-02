@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import {
   getAllUsersService,
   getUserByEmailService,
+  getUserByIdService,
+  // getLaborers,
+  // getCustomers,
   registerUserService,
   updateUserService,
   hardDeleteUserService,
@@ -13,6 +16,7 @@ import {
 } from "@/services/users";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import UserUtilities from "@/utilities/user-utilities"
 
 dotenv.config();
 
@@ -28,11 +32,22 @@ class UserController {
   async getUserByEmail(req: Request, res: Response) {
     const { email } = req.body;
 
-    console.log(email);
     const result = await getUserByEmailService(email);
-    console.log(result.status);
 
     if (result.status === "error") {
+      return res.status(400).json(result);
+    }
+
+    return res.status(200).json(result);
+  }
+
+  async getUserById(req: Request, res: Response) {
+    const { id } = req.params;
+    console.log("id", id);
+
+    const result = await getUserByIdService(id);
+
+    if(result.status === "error") {
       return res.status(400).json(result);
     }
 
@@ -69,15 +84,8 @@ class UserController {
     }
 
     // Create token
-    const payload = { email: email };
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
-
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "lax",
-      maxAge: 60 * 60 * 100,
-    });
+    const token = await UserUtilities.createToken(req,res);
+    console.log(token);
 
     return res.status(200).json(result);
   }
@@ -144,7 +152,7 @@ class UserController {
 
   async softDeleteUser(req: Request, res: Response) {
     //Get user email
-    const { email, userType } = req.body;
+    const { email } = req.body;
 
     //Delete user
     const result = await softDeleteUserService(email);

@@ -12,6 +12,10 @@ class UserRepository {
     return await prisma.users.findFirst({ where: { email } });
   }
 
+  async findById(id: string) {
+    return await prisma.users.findFirst({ where: { id } });
+  }
+  
   async create(data: UserInterfaces.CreateUserData) {
     return await prisma.users.create({ data });
   }

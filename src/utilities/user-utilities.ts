@@ -11,10 +11,12 @@ class UserUtilities {
   async createToken(req: Request, res: Response) {
     const { email } = req.body;
     const { data } = await getUserByEmailService(email);
+    console.log("user by email", data);
 
     // Create a token
-    const payload = { email: email, role: data?.userType };
+    const payload = { email: email, role: data?.userType, onBoarded: data?.onBoarded };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+    console.log("payload", payload);
 
     // Send token to cookies
     res.cookie("token", token, {

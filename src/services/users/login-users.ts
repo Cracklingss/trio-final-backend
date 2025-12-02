@@ -25,7 +25,7 @@ export async function loginUserService(email: string, password: string) {
   if(!validPass) {
     return {
       status: "error",
-      message: "Invalid password!"
+      message: "Invalid email or password!"
     }
   }
 

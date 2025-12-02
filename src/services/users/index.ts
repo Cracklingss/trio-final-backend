@@ -1,4 +1,4 @@
-export { getAllUsersService, getUserByEmailService } from "./get-users";
+export { getAllUsersService, getUserByEmailService, getUserByIdService } from "./get-users";
 export {
   registerUserService,
 } from "./register-users";

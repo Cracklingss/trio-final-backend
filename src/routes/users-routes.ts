@@ -6,6 +6,7 @@ const router = Router();
 
 router.get("/users", UserController.getAllUsers);
 router.post("/user", UserController.getUserByEmail);
+router.get("/user/:id", UserController.getUserById);
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
 router.put("/user", UserController.updateUser);
@@ -15,6 +16,6 @@ router.patch("/user-reactivate", UserController.reactivateUser);
 router.patch("/change-password", UserController.changePassword);
 router.put("/forgot-password", UserController.forgotPassword);
 router.post("/token", UserUtilities.createToken);
-router.delete("/token", UserUtilities.deleteToken);
+router.post("/delete-token", UserUtilities.deleteToken);
 
 export default router;

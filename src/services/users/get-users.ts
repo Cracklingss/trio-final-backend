@@ -12,7 +12,23 @@ export async function getAllUsersService() {
 
 export async function getUserByEmailService(email: string) {
   const result = await UserRepository.findByEmail(email);
-  console.log("fasdfads", result);
+
+  if(result === null) {
+    return {
+      status: "error",
+      message: "User not found"
+    }
+  }
+
+  return {
+    status: "success",
+    message: "Successfully fetched user",
+    data: result
+  }
+}
+
+export async function getUserByIdService(id: string) {
+  const result = await UserRepository.findById(id);
 
   if(result === null) {
     return {
