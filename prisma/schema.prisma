@@ -57,3 +57,8 @@ model Bookings {
   isActive Boolean @default(true)
   details String
 }
+
+model Reviews {
+  id String @id @default(uuid())
+  
+}
