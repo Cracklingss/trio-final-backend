@@ -15,7 +15,7 @@ router.delete("/user-soft", UserController.softDeleteUser);
 router.patch("/user-reactivate", UserController.reactivateUser);
 router.patch("/change-password", UserController.changePassword);
 router.put("/forgot-password", UserController.forgotPassword);
-router.post("/token", UserUtilities.createToken);
+router.post("/token", UserController.createToken);
 router.post("/delete-token", UserUtilities.deleteToken);
 
 export default router;

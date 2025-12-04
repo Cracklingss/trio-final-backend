@@ -37,11 +37,11 @@ model Services {
 
 model ReportedUsers {
   id String @id @default(uuid())
-  reportedAcc String
+  reportedUser String
   userType String
-  reason String
+  reasons String
   others String @default("")
-  whatHappened String 
+  description  String 
   status String @default("In Progress")
 }
 

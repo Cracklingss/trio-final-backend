@@ -114,7 +114,8 @@ class UserController {
 
   async forgotPassword(req: Request, res: Response) {
     // Get user input
-    const { email, password } = req.body;
+    const { email, newPassword: password } = req.body;
+    console.log(email, password);
 
     // Call the forgot password service
     const result = await forgotPasswordService(email, password);
@@ -153,6 +154,20 @@ class UserController {
     });
 
     return res.status(200).json(result);
+  }
+
+  async createToken(req: Request, res: Response) {
+    const { token } = await UserUtilities.createToken(req);
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 1000
+    })
+
+    return res.status(200).json({ status: "success", message: "Token created" })
   }
 
   async hardDeleteUser(req: Request, res: Response) {

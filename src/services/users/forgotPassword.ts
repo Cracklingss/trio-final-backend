@@ -13,6 +13,13 @@ export async function forgotPasswordService(email: string, newPassword: string) 
     }
   }
 
+  if(!newPassword) {
+    return {
+      status: "error",
+      message: "Password doesn't exists"
+    }
+  }
+
   // Hash password
   const hashedPassword = await bcrypt.hash(newPassword, 10);
 
