@@ -9,7 +9,7 @@ router.get("/services/by-active", ServiceController.getAllActiveService);
 router.post("/service", ServiceController.createService);
 router.put("/service", ServiceController.updateService);
 router.patch("/service/reactivate", ServiceController.reactivateService);
-router.delete("/service", ServiceController.hardDeleteService);
+router.post("/service", ServiceController.hardDeleteService);
 router.patch("/service/deactivate", ServiceController.softDeleteService);
 
 export default router;

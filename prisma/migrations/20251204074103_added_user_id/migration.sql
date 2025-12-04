@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "ReportedUsers" ADD COLUMN     "userId" TEXT,
+ALTER COLUMN "userType" DROP NOT NULL,
+ALTER COLUMN "description" DROP NOT NULL,
+ALTER COLUMN "reasons" DROP NOT NULL,
+ALTER COLUMN "reportedUser" DROP NOT NULL;

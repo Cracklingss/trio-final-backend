@@ -171,11 +171,11 @@ class UserController {
   }
 
   async hardDeleteUser(req: Request, res: Response) {
-    //Get user email
-    const { email } = req.body;
+    //Get user id
+    const { id } = req.body;
 
     //Delete user
-    const result = await hardDeleteUserService(email);
+    const result = await hardDeleteUserService(id);
 
     //Check if error
     if (result.status === "error") {
@@ -186,11 +186,11 @@ class UserController {
   }
 
   async softDeleteUser(req: Request, res: Response) {
-    //Get user email
-    const { email } = req.body;
+    //Get user id
+    const { id } = req.body;
 
     //Delete user
-    const result = await softDeleteUserService(email);
+    const result = await softDeleteUserService(id);
 
     //Check if error
     if (result.status === "error") {

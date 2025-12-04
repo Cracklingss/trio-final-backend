@@ -24,12 +24,12 @@ class UserRepository {
     return await prisma.users.update({ where: { email }, data });
   }
 
-  async hardDelete(email: string) {
-    return await prisma.users.delete({ where: { email } });
+  async hardDelete(id: string) {
+    return await prisma.users.delete({ where: { id } });
   }
 
-  async softDelete(email: string) {
-    return await prisma.users.update({ where: { email }, data: { isActive: false } })
+  async softDelete(id: string) {
+    return await prisma.users.update({ where: { id }, data: { isActive: false } })
   }
 
   async reactivate(email: string) {

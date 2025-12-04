@@ -1,7 +1,7 @@
 export interface ReportsData {
-  reportedAcc: string,
-  typeOfUser: string,
+  reportedUser: string,
+  userType: string,
   others: string,
-  reason: string,
-  whatHappened: string
+  reasons: string,
+  description: string
 }

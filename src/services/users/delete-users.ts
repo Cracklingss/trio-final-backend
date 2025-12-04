@@ -1,14 +1,14 @@
 import UserRepository from "@/repositories/UserRepository";
 
-export async function  hardDeleteUserService(email: string) {
+export async function  hardDeleteUserService(id: string) {
   // Check if user exists
-  const userExist = await UserRepository.findByEmail(email);
+  const userExist = await UserRepository.findById(id);
   if (!userExist) {
     return { status: "error", message: "User not found" };
   }
 
   // Delete user from the database
-  await UserRepository.hardDelete(email);
+  await UserRepository.hardDelete(id);
 
   return {
     status: "success",
@@ -16,9 +16,9 @@ export async function  hardDeleteUserService(email: string) {
   }
 }
 
-export async function softDeleteUserService(email: string) {
+export async function softDeleteUserService(id: string) {
   // Check if user exists
-  const userExist = await UserRepository.findByEmail(email);
+  const userExist = await UserRepository.findById(id);
   if (!userExist) {
     return { status: "error", message: "User not found" };
   }
@@ -29,7 +29,7 @@ export async function softDeleteUserService(email: string) {
   }
 
   // isActive = false
-  await UserRepository.softDelete(email);
+  await UserRepository.softDelete(id);
 
   return {
     status: "success",

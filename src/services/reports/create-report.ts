@@ -3,7 +3,7 @@ import { ReportsData } from "@/types/reports";
 
 export async function createReportService(data: ReportsData) {
   // Check if there's no empty fields
-  if (!data.reason || !data.reportedAcc || !data.whatHappened) {
+  if (!data.reasons || !data.reportedUser || !data.description) {
     return {
       status: "error",
       message: "Missing fields!",
@@ -12,11 +12,11 @@ export async function createReportService(data: ReportsData) {
 
   // Create reported user
   const result = await ReportRepository.create({
-    reportedAcc: data.reportedAcc,
-    typeOfUser: data.typeOfUser,
-    reason: data.reason,
+    reportedUser: data.reportedUser,
+    userType: data.userType,
+    reasons: data.reasons,
     others: data.others,
-    whatHappened: data.whatHappened,
+    description: data.description,
   });
 
   return {

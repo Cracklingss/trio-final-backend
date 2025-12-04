@@ -9,7 +9,7 @@ router.get("/bookings/by-active", BookingController.getAllActiveBookings);
 router.post("/booking", BookingController.createBooking);
 router.put("/booking", BookingController.updateBooking);
 router.patch("/booking/reactivate", BookingController.reactivateBooking);
-router.delete("/booking", BookingController.hardDeleteBooking);
+router.post("/booking", BookingController.hardDeleteBooking);
 router.patch("/booking/deactivate", BookingController.softDeleteBooking);
 
 export default router; 

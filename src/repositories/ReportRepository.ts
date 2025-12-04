@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 class ReportRepository {
   async findAll() {
     return await prisma.reportedUsers.findMany({
-      orderBy: { reportedAcc: "asc" },
+      orderBy: { reportedUser: "asc" },
     });
   }
 
