@@ -8,27 +8,26 @@ dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET!;
 
 class UserUtilities {
-  async createToken(req: Request, res: Response) {
+  async createToken(req: Request) {
     const { email } = req.body;
     const { data } = await getUserByEmailService(email);
-    console.log("user by email", data);
 
     // Create a token
     const payload = { email: email, role: data?.userType, onBoarded: data?.onBoarded };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
-    console.log("payload", payload);
 
-    // Send token to cookies
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "lax",
-      maxAge: 60 * 60 * 100,
-    });
+    return { token: token, payload: payload }
+  }
 
-    return res
-      .status(200)
-      .json({ status: "success", message: "Create token done!" });
+  async newTokenForOnboarding(req: Request) {
+    const { email } = req.body;
+    const { data } = await getUserByEmailService(email);
+
+    // Create a token
+    const payload = { email: email, role: data?.userType, onBoarded: true };
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+
+    return { token: token, payload: payload }
   }
 
   async deleteToken(req: Request, res: Response) {

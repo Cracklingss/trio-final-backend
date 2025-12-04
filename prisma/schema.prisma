@@ -11,7 +11,6 @@ model Users {
   id String @id @default(uuid())
   email String @unique
   password String
-  displayName String @default("")
   bio String?
   firstName String?
   lastName String?
@@ -38,7 +37,7 @@ model Services {
 model ReportedUsers {
   id String @id @default(uuid())
   reportedAcc String
-  typeOfUser String
+  userType String
   reason String
   others String @default("")
   whatHappened String 
@@ -60,5 +59,9 @@ model Bookings {
 
 model Reviews {
   id String @id @default(uuid())
-  
+  date DateTime @default(now())
+  profilePicture String
+  custmerName String
+  rate Int @default(0)
+  description String
 }

@@ -16,7 +16,7 @@ import {
 } from "@/services/users";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import UserUtilities from "@/utilities/user-utilities"
+import UserUtilities from "@/utilities/user-utilities";
 
 dotenv.config();
 
@@ -43,11 +43,10 @@ class UserController {
 
   async getUserById(req: Request, res: Response) {
     const { id } = req.params;
-    console.log("id", id);
 
     const result = await getUserByIdService(id);
 
-    if(result.status === "error") {
+    if (result.status === "error") {
       return res.status(400).json(result);
     }
 
@@ -84,8 +83,16 @@ class UserController {
     }
 
     // Create token
-    const token = await UserUtilities.createToken(req,res);
-    console.log(token);
+    const { token } = await UserUtilities.createToken(req);
+    console.log("old token", token);
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 1000,
+    });
 
     return res.status(200).json(result);
   }
@@ -123,21 +130,34 @@ class UserController {
   async updateUser(req: Request, res: Response) {
     //Get user data
     const { email, ...data } = req.body;
+    console.log("user data", data);
 
     //Update user
     const result = await updateUserService(email, data);
+    console.log(result)
 
-    //Check if error
     if (result.status === "error") {
       return res.status(400).json(result);
     }
+
+    const { token, payload } = await UserUtilities.newTokenForOnboarding(req);
+    console.log("new token", token);
+    console.log("new payload", payload);
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 1000,
+    });
 
     return res.status(200).json(result);
   }
 
   async hardDeleteUser(req: Request, res: Response) {
     //Get user email
-    const { email, userType } = req.body;
+    const { email } = req.body;
 
     //Delete user
     const result = await hardDeleteUserService(email);
