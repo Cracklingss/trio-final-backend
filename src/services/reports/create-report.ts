@@ -12,6 +12,7 @@ export async function createReportService(data: ReportsData) {
 
   // Create reported user
   const result = await ReportRepository.create({
+    userId: data.userId,
     reportedUser: data.reportedUser,
     userType: data.userType,
     reasons: data.reasons,

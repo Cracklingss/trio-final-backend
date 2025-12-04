@@ -8,6 +8,7 @@ export async function createServiceService(data: ServiceData) {
     !data.service ||
     !data.description ||
     !data.availability ||
+    !data.laborerId ||
     !data.serviceLoc
   ) {
     return {
@@ -23,6 +24,7 @@ export async function createServiceService(data: ServiceData) {
     description: data.description,
     availability: data.availability,
     serviceLoc: data.serviceLoc,
+    laborerId: data.laborerId,
     isActive: data.isActive,
   });
 

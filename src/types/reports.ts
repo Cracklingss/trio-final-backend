@@ -1,4 +1,5 @@
 export interface ReportsData {
+  userId: string,
   reportedUser: string,
   userType: string,
   others: string,

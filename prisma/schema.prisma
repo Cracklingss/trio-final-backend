@@ -23,6 +23,7 @@ model Users {
   userType String?
   onBoarded Boolean @default(false)
   contactMethod String?
+  services  Services[]
 }
 
 model Services {
@@ -33,6 +34,9 @@ model Services {
   availability String
   serviceLoc String
   isActive Boolean @default(true)
+  laborerId String
+
+  laborer Users @relation(fields: [laborerId], references: [id])
 }
 
 model ReportedUsers {
