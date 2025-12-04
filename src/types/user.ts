@@ -11,6 +11,7 @@ export interface UserData {
   gender?: string;
   contactNumber?: string;
   profilePicture?: string;
+  address?: string;
   rate?: number;
   isActive: boolean;
 }

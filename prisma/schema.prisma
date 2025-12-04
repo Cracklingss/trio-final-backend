@@ -19,6 +19,7 @@ model Users {
   profilePicture String?
   rate Int @default(0)
   isActive Boolean @default(true)
+  address String?
   userType String?
   onBoarded Boolean @default(false)
   contactMethod String?
