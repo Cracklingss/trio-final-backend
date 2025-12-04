@@ -48,15 +48,15 @@ model ReportedUsers {
 
 model Bookings {
   id String @id @default(uuid())
-  bookingDate DateTime @default(now())
-  bookingTime DateTime
-  address String
-  bookerName String
-  bookerContact String
+  bookingDate String?
+  bookingTime String?
+  address String?
+  bookerName String?
+  bookerContact String?
   bookerEmail String @default("")
   status String @default("In Progress")
   isActive Boolean @default(true)
-  details String
+  details String?
 }
 
 model Reviews {

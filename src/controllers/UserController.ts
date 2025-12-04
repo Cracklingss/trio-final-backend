@@ -54,7 +54,6 @@ class UserController {
   }
 
   async register(req: Request, res: Response) {
-    console.log("Registering...");
     //Get user input
     const { ...userData } = req.body;
 
@@ -70,7 +69,6 @@ class UserController {
   }
 
   async login(req: Request, res: Response) {
-    console.log("Logging in...");
     //Get user input
     const { email, password } = req.body;
 
@@ -84,7 +82,6 @@ class UserController {
 
     // Create token
     const { token } = await UserUtilities.createToken(req);
-    console.log("old token", token);
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -115,7 +112,6 @@ class UserController {
   async forgotPassword(req: Request, res: Response) {
     // Get user input
     const { email, newPassword: password } = req.body;
-    console.log(email, password);
 
     // Call the forgot password service
     const result = await forgotPasswordService(email, password);
@@ -131,19 +127,15 @@ class UserController {
   async updateUser(req: Request, res: Response) {
     //Get user data
     const { email, ...data } = req.body;
-    console.log("user data", data);
 
     //Update user
     const result = await updateUserService(email, data);
-    console.log(result)
 
     if (result.status === "error") {
       return res.status(400).json(result);
     }
 
-    const { token, payload } = await UserUtilities.newTokenForOnboarding(req);
-    console.log("new token", token);
-    console.log("new payload", payload);
+    const { token } = await UserUtilities.newTokenForOnboarding(req);
 
     res.cookie("token", token, {
       httpOnly: true,

@@ -4,10 +4,12 @@ import { BookingsData } from "@/types/bookings"
 export async function createBookingService(data: BookingsData) {
   //Validate fields
   if(
+    !data.bookingDate ||
     !data.bookingTime ||
     !data.address ||
     !data.bookerName ||
     !data.bookerContact ||
+    !data.bookerEmail ||
     !data.details 
   ) {
     return {
@@ -18,12 +20,13 @@ export async function createBookingService(data: BookingsData) {
 
   //Create data
   const result = await BookingRepository.create({ 
+    bookingDate: data.bookingDate,
     bookingTime: data.bookingTime,
     address: data.address,
     bookerName: data.bookerName,
     bookerContact: data.bookerContact,
+    bookerEmail: data.bookerEmail,
     details: data.details,
-    isActive: data.isActive
    });
 
   return {

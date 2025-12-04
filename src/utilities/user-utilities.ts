@@ -27,7 +27,7 @@ class UserUtilities {
     const payload = { email: email, role: data?.userType, onBoarded: true };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
 
-    return { token: token, payload: payload }
+    return { token: token }
   }
 
   async deleteToken(req: Request, res: Response) {

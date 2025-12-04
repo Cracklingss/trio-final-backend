@@ -1,8 +1,10 @@
 export interface BookingsData {
-  bookingTime: Date,
-  address: string,
-  bookerName: string,
-  bookerContact: string,
-  details: string,
-  isActive: boolean
+  bookingDate?: string,
+  bookingTime?: string,
+  address?: string,
+  bookerName?: string,
+  bookerContact?: string,
+  bookerEmail?: string,
+  details?: string,
+  isActive?: boolean
 }
