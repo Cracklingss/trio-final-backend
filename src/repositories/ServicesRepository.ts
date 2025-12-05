@@ -13,7 +13,7 @@ class ServiceRepository {
   }
 
   async findAllActive() {
-    return await prisma.services.findMany({ where: { isActive: true } });
+    return await prisma.services.findMany({ where: { isActive: true }, include: { laborer: true } });
   }
 
   async create(data: ServiceData) {

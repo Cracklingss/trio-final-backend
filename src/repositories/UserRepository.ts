@@ -13,7 +13,7 @@ class UserRepository {
   }
 
   async findById(id: string) {
-    return await prisma.users.findFirst({ where: { id } });
+    return await prisma.users.findFirst({ where: { id }, include: { services: true } });
   }
   
   async create(data: UserInterfaces.CreateUserData) {
