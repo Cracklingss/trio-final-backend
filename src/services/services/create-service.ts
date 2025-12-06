@@ -4,7 +4,6 @@ import { ServiceData } from "@/types/service";
 export async function createServiceService(data: ServiceData) {
   //Validate fields
   if (
-    !data.name ||
     !data.service ||
     !data.description ||
     !data.availability ||
@@ -19,7 +18,6 @@ export async function createServiceService(data: ServiceData) {
 
   //Create data
   const result = await ServicesRepository.create({
-    name: data.name,
     service: data.service,
     description: data.description,
     availability: data.availability,

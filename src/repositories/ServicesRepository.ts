@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 class ServiceRepository {
   async findAll() {
-    return await prisma.services.findMany({ orderBy: { name: "asc" } });
+    return await prisma.services.findMany();
   }
 
   async findById(id: string) {
