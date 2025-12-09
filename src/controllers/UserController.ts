@@ -17,6 +17,7 @@ import {
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import UserUtilities from "@/utilities/user-utilities";
+import { sendEmail, verifyCode } from "@/utilities/sendEmail";
 
 dotenv.config();
 
@@ -200,6 +201,26 @@ class UserController {
     if (result.status === "error") {
       return res.status(400).json(result);
     }
+
+    return res.status(200).json(result);
+  }
+
+  async sendEmail(req: Request, res: Response) {
+    const { toEmail, code } = req.body;
+
+    const result = await sendEmail(toEmail, code);
+
+    if (result.status === "error") {
+      return res.status(400).json(result);
+    }
+
+    return res.status(200).json(result);
+  }
+
+  async verifyCode(req: Request, res: Response) {
+    const { toEmail, inputCode } = req.body;
+
+    const result = await verifyCode(toEmail, inputCode);
 
     return res.status(200).json(result);
   }

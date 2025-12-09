@@ -17,5 +17,7 @@ router.patch("/change-password", UserController.changePassword);
 router.put("/forgot-password", UserController.forgotPassword);
 router.post("/token", UserController.createToken);
 router.post("/delete-token", UserUtilities.deleteToken);
+router.post("/send-email", UserController.sendEmail);
+router.post("/verify-code", UserController.verifyCode);
 
 export default router;
