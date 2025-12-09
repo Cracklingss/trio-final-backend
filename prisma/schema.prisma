@@ -33,6 +33,7 @@ model Services {
   availability String
   serviceLoc String
   isActive Boolean @default(true)
+  status String @default("For Approval")
   laborerId String
 
   laborer Users @relation(fields: [laborerId], references: [id])
