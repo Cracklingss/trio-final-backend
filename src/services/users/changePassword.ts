@@ -1,9 +1,9 @@
 import UserRepository from "@/repositories/UserRepository";
 import bcrypt from "bcryptjs";
 
-export async function changePasswordService(email: string, password: string) {
+export async function changePasswordService(id: string, currentPassword: string, newPassword: string) {
   //Check email exists
-  const user = await UserRepository.findByEmail(email);
+  const user = await UserRepository.findById(id);
   if(!user) {
     return {
       status: "error",
@@ -12,7 +12,7 @@ export async function changePasswordService(email: string, password: string) {
   }
 
   //Validate old password
-  const validPass = await bcrypt.compare(password, user.password);
+  const validPass = await bcrypt.compare(currentPassword, user.password);
   if(!validPass) {
     return {
       status: "error",
@@ -21,10 +21,10 @@ export async function changePasswordService(email: string, password: string) {
   }
 
   //Hash password
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
 
   //Change password
-  await UserRepository.update(email, {
+  await UserRepository.update(user.email, {
     password: hashedPassword
   })
 

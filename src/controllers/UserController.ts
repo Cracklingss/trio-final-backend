@@ -97,10 +97,10 @@ class UserController {
 
   async changePassword(req: Request, res: Response) {
     //Get user input
-    const { email, password } = req.body;
+    const { id, currentPassword, newPassword } = req.body;
 
     //Call the change password service
-    const result = await changePasswordService(email, password);
+    const result = await changePasswordService(id, currentPassword, newPassword);
 
     //Check if error
     if (result.status === "error") {

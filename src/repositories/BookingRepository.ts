@@ -21,7 +21,7 @@ class BookingRepository {
     }
   
     async update(id: string, data: Partial<BookingsData>) {
-      return await prisma.bookings.update({ where: { id },data });
+      return await prisma.bookings.update({ where: { id }, data });
     }
   
     async hardDelete(id: string) {

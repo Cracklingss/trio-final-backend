@@ -9,8 +9,8 @@ datasource db {
 
 model Users {
   id String @id @default(uuid())
-  email String @unique
-  password String
+  email String? @unique
+  password String?
   bio String?
   firstName String?
   lastName String?
@@ -24,6 +24,7 @@ model Users {
   onBoarded Boolean @default(false)
   contactMethod String?
   services  Services[]
+  bookings Bookings[]
 }
 
 model Services {
@@ -61,6 +62,9 @@ model Bookings {
   status String @default("In Progress")
   isActive Boolean @default(true)
   details String?
+  laborerId String
+
+  laborer Users @relation(fields: [laborerId], references: [id])
 }
 
 model Reviews {
