@@ -21,7 +21,7 @@ export async function loginUserService(email: string, password: string) {
   }
 
   //Compare password
-  const validPass = await bcrypt.compare(password, user.password);
+  const validPass = await bcrypt.compare(password, user.password!);
   if(!validPass) {
     return {
       status: "error",

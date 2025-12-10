@@ -12,7 +12,7 @@ export async function changePasswordService(id: string, currentPassword: string,
   }
 
   //Validate old password
-  const validPass = await bcrypt.compare(currentPassword, user.password);
+  const validPass = await bcrypt.compare(currentPassword, user.password!);
   if(!validPass) {
     return {
       status: "error",
@@ -24,7 +24,7 @@ export async function changePasswordService(id: string, currentPassword: string,
   const hashedPassword = await bcrypt.hash(newPassword, 10);
 
   //Change password
-  await UserRepository.update(user.email, {
+  await UserRepository.update(user.email!, {
     password: hashedPassword
   })
 
