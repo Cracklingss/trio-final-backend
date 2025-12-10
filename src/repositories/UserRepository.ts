@@ -8,14 +8,36 @@ class UserRepository {
     return await prisma.users.findMany();
   }
 
-  async findByEmail (email: string) {
-    return await prisma.users.findFirst({ where: { email }, include: { services: true, laborerBookings: true, customerBookings: true } });
+  async findByEmail(email: string) {
+    return await prisma.users.findUnique({
+      where: { email },
+      include: {
+        services: true,
+        laborerBookings: true,
+        customerBookings: {
+          include: {
+            laborer: true
+          }
+        },
+      },
+    });
   }
 
   async findById(id: string) {
-    return await prisma.users.findFirst({ where: { id }, include: { services: true, laborerBookings: true, customerBookings: true } });
+    return await prisma.users.findFirst({
+      where: { id },
+      include: {
+        services: true,
+        laborerBookings: true,
+        customerBookings: {
+          include: {
+            laborer: true
+          }
+        },
+      },
+    });
   }
-  
+
   async create(data: UserInterfaces.CreateUserData) {
     return await prisma.users.create({ data });
   }
@@ -29,11 +51,17 @@ class UserRepository {
   }
 
   async softDelete(id: string) {
-    return await prisma.users.update({ where: { id }, data: { isActive: false } })
+    return await prisma.users.update({
+      where: { id },
+      data: { isActive: false },
+    });
   }
 
   async reactivate(email: string) {
-    return await prisma.users.update({ where: { email }, data: { isActive: true }});
+    return await prisma.users.update({
+      where: { email },
+      data: { isActive: true },
+    });
   }
 }
 

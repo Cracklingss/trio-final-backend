@@ -24,6 +24,7 @@ model Users {
   onBoarded Boolean @default(false)
   contactMethod String?
   services  Services[]
+
   laborerBookings Bookings[] @relation("LaborerBookings")
   customerBookings Bookings[] @relation("CustomerBookings")
 }
@@ -54,6 +55,7 @@ model ReportedUsers {
 
 model Bookings {
   id String @id @default(uuid())
+  serviceName String?
   bookingDate String?
   bookingTime String?
   address String?
@@ -64,6 +66,7 @@ model Bookings {
   isAccepted Boolean @default(false)
   isActive Boolean @default(true)
   details String?
+
   laborerId String
   customerId String
 

@@ -20,6 +20,7 @@ export async function createBookingService(data: BookingsData) {
 
   //Create data
   const result = await BookingRepository.create({ 
+    serviceName: data.serviceName,
     bookingDate: data.bookingDate,
     bookingTime: data.bookingTime,
     address: data.address,

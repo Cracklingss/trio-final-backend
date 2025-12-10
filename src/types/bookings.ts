@@ -1,4 +1,5 @@
 export interface BookingsData {
+  serviceName?: string;
   bookingDate?: string;
   bookingTime?: string;
   address?: string;

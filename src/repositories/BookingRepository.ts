@@ -9,7 +9,7 @@ class BookingRepository {
     }
   
     async findById(id: string) {
-      return await prisma.bookings.findFirst({ where: { id } });
+      return await prisma.bookings.findFirst({ where: { id }, include: { customer: true, laborer: true } });
     }
   
     async findAllActive() {
