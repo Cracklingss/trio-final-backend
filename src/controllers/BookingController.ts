@@ -7,7 +7,9 @@ import {
   updateBookingService,
   reactivateBookingService,
   hardDeleteBookingService,
-  softDeleteBookingService
+  softDeleteBookingService,
+  acceptBookingService,
+  declineBookingService,
 } from "@/services/bookings";
 
 class BookingController {
@@ -112,6 +114,26 @@ class BookingController {
     if(result.status === "error") {
       return res.status(400).json(result);
     }
+
+    return res.status(200).json(result);
+  }
+
+  async acceptBooking(req: Request, res: Response) {
+    // Get booking id
+    const { id } = req.body;
+
+    // Call accept booking service
+    const result = await acceptBookingService(id);
+
+    return res.status(200).json(result);
+  }
+
+  async declineBooking(req: Request, res: Response) {
+    // Get booking id
+    const { id } = req.body;
+
+    // Call accept booking service
+    const result = await declineBookingService(id);
 
     return res.status(200).json(result);
   }

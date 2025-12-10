@@ -60,6 +60,7 @@ model Bookings {
   bookerContact String?
   bookerEmail String @default("")
   status String @default("In Progress")
+  isAccepted Boolean @default(false)
   isActive Boolean @default(true)
   details String?
   laborerId String

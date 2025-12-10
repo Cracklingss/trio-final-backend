@@ -56,3 +56,39 @@ export async function reactivateBookingService(id: string) {
     data: result
   }
 }
+
+export async function acceptBookingService(id: string) {
+  //Check if ID is provided
+  if(!id) {
+    return {
+      status: "error",
+      message: "ID is not provided",
+    }
+  }
+
+  //Accpet booking
+  await BookingsRepository.update(id, { isAccepted: true });
+
+  return {
+    status: "success",
+    message: "Booking Accepted!"
+  }
+}
+
+export async function declineBookingService(id: string) {
+  //Check if ID is provided
+  if(!id) {
+    return {
+      status: "error",
+      message: "ID is not provided",
+    }
+  }
+
+  //Accpet booking
+  await BookingsRepository.update(id, { isAccepted: false });
+
+  return {
+    status: "success",
+    message: "Booking Accepted!"
+  }
+}

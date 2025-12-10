@@ -6,6 +6,7 @@ export interface BookingsData {
   bookerContact?: string;
   bookerEmail?: string;
   details?: string;
+  isAccepted?: boolean;
   isActive?: boolean;
   laborerId: string;
 }
