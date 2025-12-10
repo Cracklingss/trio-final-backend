@@ -9,4 +9,5 @@ export interface BookingsData {
   isAccepted?: boolean;
   isActive?: boolean;
   laborerId: string;
+  customerId: string;
 }

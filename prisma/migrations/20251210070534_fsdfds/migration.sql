@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Bookings" ALTER COLUMN "laborerId" DROP DEFAULT,
+ALTER COLUMN "customerId" DROP DEFAULT;

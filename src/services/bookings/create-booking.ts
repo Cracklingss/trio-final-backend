@@ -27,7 +27,8 @@ export async function createBookingService(data: BookingsData) {
     bookerContact: data.bookerContact,
     bookerEmail: data.bookerEmail,
     details: data.details,
-    laborerId: data.laborerId
+    laborerId: data.laborerId,
+    customerId: data.customerId
    });
 
   return {

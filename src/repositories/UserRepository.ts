@@ -9,11 +9,11 @@ class UserRepository {
   }
 
   async findByEmail (email: string) {
-    return await prisma.users.findFirst({ where: { email }, include: { services: true, bookings: true } });
+    return await prisma.users.findFirst({ where: { email }, include: { services: true, laborerBookings: true, customerBookings: true } });
   }
 
   async findById(id: string) {
-    return await prisma.users.findFirst({ where: { id }, include: { services: true, bookings: true } });
+    return await prisma.users.findFirst({ where: { id }, include: { services: true, laborerBookings: true, customerBookings: true } });
   }
   
   async create(data: UserInterfaces.CreateUserData) {

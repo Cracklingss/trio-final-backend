@@ -24,7 +24,8 @@ model Users {
   onBoarded Boolean @default(false)
   contactMethod String?
   services  Services[]
-  bookings Bookings[]
+  laborerBookings Bookings[] @relation("LaborerBookings")
+  customerBookings Bookings[] @relation("CustomerBookings")
 }
 
 model Services {
@@ -64,8 +65,10 @@ model Bookings {
   isActive Boolean @default(true)
   details String?
   laborerId String
+  customerId String
 
-  laborer Users @relation(fields: [laborerId], references: [id])
+  laborer Users @relation("LaborerBookings", fields: [laborerId], references: [id])
+  customer Users @relation("CustomerBookings", fields: [customerId], references: [id])
 }
 
 model Reviews {

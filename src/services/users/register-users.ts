@@ -35,6 +35,6 @@ export async function registerUserService(data: CreateUserData) {
 
   return {
     status: "success",
-    message: "User created successfully!"
+    message: "User registered successfully!"
   }
 }
