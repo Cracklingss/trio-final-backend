@@ -9,7 +9,7 @@ class UserRepository {
   }
 
   async findByEmail (email: string) {
-    return await prisma.users.findFirst({ where: { email } });
+    return await prisma.users.findFirst({ where: { email }, include: { services: true } });
   }
 
   async findById(id: string) {
