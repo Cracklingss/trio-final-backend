@@ -13,7 +13,11 @@ class UserRepository {
       where: { email },
       include: {
         services: true,
-        laborerBookings: true,
+        laborerBookings: {
+          include: {
+            customer: true
+          }
+        },
         customerBookings: {
           include: {
             laborer: true
