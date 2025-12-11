@@ -1,9 +1,9 @@
 import UserRepository from "@/repositories/UserRepository";
 import * as Interfaces from "@/types/user";
 
-export async function updateUserService (email: string, data: Partial<Interfaces.CreateUserData>) {
+export async function updateUserService (id: string, data: Partial<Interfaces.CreateUserData>) {
   //Check if user exist
-  const userExist = await UserRepository.findByEmail(email);
+  const userExist = await UserRepository.findById(id);
   if(!userExist) {
     return {
       status: "error",
@@ -20,7 +20,7 @@ export async function updateUserService (email: string, data: Partial<Interfaces
   }
 
   //Update user data
-  await UserRepository.update(email, data);
+  await UserRepository.update(id, data);
 
   return {
     status: "success",

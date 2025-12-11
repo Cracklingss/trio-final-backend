@@ -44,6 +44,7 @@ model Services {
 
 model ReportedUsers {
   id String @id @default(uuid())
+  userEmail String?
   userId String?
   reportedUser String?
   userType String?

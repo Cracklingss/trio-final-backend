@@ -32,7 +32,11 @@ class UserRepository {
       where: { id },
       include: {
         services: true,
-        laborerBookings: true,
+        laborerBookings: {
+          include: {
+            customer: true
+          }
+        },
         customerBookings: {
           include: {
             laborer: true
@@ -46,8 +50,8 @@ class UserRepository {
     return await prisma.users.create({ data });
   }
 
-  async update(email: string, data: Partial<UserInterfaces.CreateUserData>) {
-    return await prisma.users.update({ where: { email }, data });
+  async update(id: string, data: Partial<UserInterfaces.CreateUserData>) {
+    return await prisma.users.update({ where: { id }, data });
   }
 
   async hardDelete(id: string) {

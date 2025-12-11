@@ -44,6 +44,7 @@ class UserController {
 
   async getUserById(req: Request, res: Response) {
     const { id } = req.params;
+    console.log("id", id);
 
     const result = await getUserByIdService(id);
 
@@ -127,10 +128,10 @@ class UserController {
 
   async updateUser(req: Request, res: Response) {
     //Get user data
-    const { email, ...data } = req.body;
+    const { id, ...data } = req.body;
 
     //Update user
-    const result = await updateUserService(email, data);
+    const result = await updateUserService(id, data);
 
     if (result.status === "error") {
       return res.status(400).json(result);

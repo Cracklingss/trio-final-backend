@@ -28,6 +28,13 @@ export async function getUserByEmailService(email: string) {
 }
 
 export async function getUserByIdService(id: string) {
+  if(!id) {
+    return {
+      status: "error",
+      message: "Id not provided"
+    }
+  }
+
   const result = await UserRepository.findById(id);
 
   if(result === null) {
