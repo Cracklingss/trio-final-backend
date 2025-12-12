@@ -36,6 +36,7 @@ class BookingController {
 
   async createBooking(req: Request, res: Response) {
     // call create booking
+    console.log(req.body);
     const result = await createBookingService(req.body);
 
     // Check if error

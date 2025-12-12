@@ -43,7 +43,7 @@ class UserController {
   }
 
   async getUserById(req: Request, res: Response) {
-    const { id } = req.params;
+    const { id } = req.body;
     console.log("id", id);
 
     const result = await getUserByIdService(id);

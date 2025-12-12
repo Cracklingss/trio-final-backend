@@ -4,7 +4,6 @@ import { BookingsData } from "@/types/bookings"
 export async function createBookingService(data: BookingsData) {
   //Validate fields
   if(
-    !data.hasReviewed ||
     !data.bookingDate ||
     !data.bookingTime ||
     !data.address ||
@@ -21,7 +20,6 @@ export async function createBookingService(data: BookingsData) {
 
   //Create data
   const result = await BookingRepository.create({ 
-    hasReviewed: data.hasReviewed,
     serviceName: data.serviceName,
     bookingDate: data.bookingDate,
     bookingTime: data.bookingTime,

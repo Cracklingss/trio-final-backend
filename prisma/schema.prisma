@@ -24,6 +24,7 @@ model Users {
   onBoarded Boolean @default(false)
   contactMethod String?
   services  Services[]
+  status String @default("Active")
   reviews Reviews[]
 
   laborerBookings Bookings[] @relation("LaborerBookings")
