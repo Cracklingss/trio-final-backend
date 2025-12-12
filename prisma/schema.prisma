@@ -17,13 +17,14 @@ model Users {
   gender String?
   contactNumber String?
   profilePicture String?
-  rate Int @default(0)
+  rate Float @default(0.0)
   isActive Boolean @default(true)
   address String?
   userType String?
   onBoarded Boolean @default(false)
   contactMethod String?
   services  Services[]
+  reviews Reviews[]
 
   laborerBookings Bookings[] @relation("LaborerBookings")
   customerBookings Bookings[] @relation("CustomerBookings")
@@ -66,6 +67,7 @@ model Bookings {
   status String @default("In Progress")
   isAccepted Boolean @default(false)
   isActive Boolean @default(true)
+  hasReviewed Boolean @default(false)
   details String?
 
   laborerId String
@@ -79,8 +81,11 @@ model Reviews {
   id String @id @default(uuid())
   date DateTime @default(now())
   customerName String
-  rate Int @default(0)
+  laborerRate Float @default(0.0)
   review String
+  laborerId String
+
+  laborer Users @relation(fields: [laborerId], references: [id])
 }
 
 model PasswordRecovery {

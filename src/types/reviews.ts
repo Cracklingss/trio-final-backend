@@ -1,5 +1,6 @@
 export interface ReviewsData {
   customerName: string;
-  rate: number;
+  laborerRate: number;
   review: string;
+  laborerId: string;
 }

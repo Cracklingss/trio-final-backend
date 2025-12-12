@@ -1,7 +1,7 @@
 import UserRepository from "@/repositories/UserRepository";
 import * as Interfaces from "@/types/user";
 
-export async function updateUserService (id: string, data: Partial<Interfaces.CreateUserData>) {
+export async function updateUserService (id: string, data: Partial<Interfaces.UserData>) {
   //Check if user exist
   const userExist = await UserRepository.findById(id);
   if(!userExist) {

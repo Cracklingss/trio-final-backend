@@ -9,7 +9,7 @@ class UserRepository {
   }
 
   async findByEmail(email: string) {
-    return await prisma.users.findUnique({
+    return await prisma.users.findFirst({
       where: { email },
       include: {
         services: true,
@@ -50,7 +50,7 @@ class UserRepository {
     return await prisma.users.create({ data });
   }
 
-  async update(id: string, data: Partial<UserInterfaces.CreateUserData>) {
+  async update(id: string, data: Partial<UserInterfaces.UserData>) {
     return await prisma.users.update({ where: { id }, data });
   }
 

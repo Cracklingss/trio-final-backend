@@ -5,6 +5,7 @@ export interface CreateUserData {
 }
 
 export interface UserData {
+  password: string;
   firstName?: string;
   lastName?: string;
   gender?: string;

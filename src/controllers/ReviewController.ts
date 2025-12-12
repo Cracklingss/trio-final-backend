@@ -9,6 +9,7 @@ import {
 
 class ReviewController {
   async createReview(req: Request, res: Response) {
+    console.log("creating review ");
     // Create review
     const result = await createReviewService(req.body);
 

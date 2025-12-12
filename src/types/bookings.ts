@@ -1,4 +1,5 @@
 export interface BookingsData {
+  hasReviewed: boolean;
   serviceName?: string;
   bookingDate?: string;
   bookingTime?: string;
