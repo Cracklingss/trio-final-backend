@@ -78,10 +78,9 @@ model Bookings {
 model Reviews {
   id String @id @default(uuid())
   date DateTime @default(now())
-  profilePicture String
-  custmerName String
+  customerName String
   rate Int @default(0)
-  description String
+  review String
 }
 
 model PasswordRecovery {
